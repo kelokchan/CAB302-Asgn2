@@ -12,7 +12,7 @@ import asgn2Exceptions.CustomerException;
  *
  */
 
-public class CustomerFactory {
+public class CustomerFactory {3
 
 	/**
 	 * A method that uses the Factory Method pattern to produce an instance of one of the asgn2Customers.Customer subclasses. 

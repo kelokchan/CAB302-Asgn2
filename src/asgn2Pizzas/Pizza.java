@@ -1,7 +1,10 @@
 package asgn2Pizzas;
 
+import java.time.Duration;
 import java.time.LocalTime;
-
+import java.util.ArrayList;
+import static java.time.temporal.ChronoUnit.MINUTES;
+import asgn2Exceptions.PizzaException;
 
 /**
  * An abstract class that represents pizzas sold at the Pizza Palace restaurant. 
@@ -13,7 +16,16 @@ import java.time.LocalTime;
  *
  */
 public abstract class Pizza  {
+	int quantity;
+	LocalTime orderTime, deliveryTime;
+	String type;
+	double price;
 	
+	double cost;
+	double orderCost;
+	double orderPrice;
+	double orderProfit;
+	private ArrayList<PizzaTopping> toppings;
 	/**
 	 *  This class represents a pizza produced at the Pizza Palace restaurant.  A detailed description of the class's fields
 	 *  and parameters is provided in the Assignment Specification, in particular in Section 5.1. 
@@ -33,6 +45,63 @@ public abstract class Pizza  {
 	 */
 	public Pizza(int quantity, LocalTime orderTime, LocalTime deliveryTime, String type, double price) throws PizzaException{
 		// TO DO	
+		LocalTime openTime = LocalTime.parse("19:00:00");
+		LocalTime closeTime = LocalTime.parse("23:00:00");
+
+		this.cost = 0;
+		this.quantity = quantity;
+		this.orderTime = orderTime;
+		this.deliveryTime = deliveryTime;
+		this.type = type;
+		this.price = price;
+		this.orderCost = 0;
+		this.orderPrice = 0;
+		this.orderProfit = 0;
+		if (orderTime.isBefore(openTime)) {
+			throw new PizzaException("Kitchen is not open yet!");
+		}
+		if (orderTime.isAfter(closeTime)) {
+			throw new PizzaException("Kitchen is closed!");
+		}
+		if (quantity <= 0) {
+			throw new PizzaException("The order must contains at least one pizza!");
+		}
+		if (quantity > 10) {
+			throw new PizzaException("You only can order 10 pizzas in one order!");
+		}
+		if(orderTime.until(deliveryTime, MINUTES) < 10){
+			throw new PizzaException("Your Pizza has not ready yet. It needs at least 10 minutues to cook.");
+		}
+		if(orderTime.until(deliveryTime, MINUTES) > 60){
+			throw new PizzaException("The pizza has been thrown out!");
+		}
+
+		toppings = new ArrayList<PizzaTopping>();
+
+		switch (type) {
+			case "Margherita":
+				toppings.add(PizzaTopping.TOMATO);
+				toppings.add(PizzaTopping.CHEESE);
+				break;
+			case "Vegetarian":
+				toppings.add(PizzaTopping.EGGPLANT);
+				toppings.add(PizzaTopping.TOMATO);
+				toppings.add(PizzaTopping.CHEESE);
+				toppings.add(PizzaTopping.MUSHROOM);
+				toppings.add(PizzaTopping.CAPSICUM);
+				break;
+			case "Meat Lovers":
+				toppings.add(PizzaTopping.BACON);
+				toppings.add(PizzaTopping.TOMATO);
+				toppings.add(PizzaTopping.CHEESE);
+				toppings.add(PizzaTopping.PEPPERONI);
+				toppings.add(PizzaTopping.SALAMI);
+				break;
+			default:
+				throw new PizzaException("Wrong Pizza Code!");
+		}
+		
+
 	}
 
 	/**
@@ -43,6 +112,9 @@ public abstract class Pizza  {
 	 */
 	public final void calculateCostPerPizza(){
 		// TO DO
+		for (PizzaTopping pizzaTopping : toppings) {
+			cost += pizzaTopping.getCost();
+		}
 	}
 	
 	/**
@@ -51,6 +123,7 @@ public abstract class Pizza  {
 	 */
 	public final double getCostPerPizza(){
 		// TO DO
+		return cost;
 	}
 
 	/**
@@ -59,6 +132,7 @@ public abstract class Pizza  {
 	 */
 	public final double getPricePerPizza(){
 		// TO DO
+		return price;
 	}
 
 	/**
@@ -67,6 +141,8 @@ public abstract class Pizza  {
 	 */
 	public final double getOrderCost(){
 		// TO DO
+		orderCost = getCostPerPizza() * quantity;
+		return orderCost;
 	}
 	
 	/**
@@ -75,6 +151,8 @@ public abstract class Pizza  {
 	 */
 	public final double getOrderPrice(){
 		// TO DO
+		orderPrice = getPricePerPizza() * quantity;
+		return orderPrice;
 	}
 	
 	
@@ -84,6 +162,8 @@ public abstract class Pizza  {
 	 */
 	public final double getOrderProfit(){
 		// TO DO
+		orderProfit = getOrderPrice() - getOrderCost();
+		return orderProfit;
 	}
 	
 
@@ -94,6 +174,10 @@ public abstract class Pizza  {
 	 */
 	public final boolean containsTopping(PizzaTopping topping){
 		// TO DO
+		if(this.toppings.contains(topping)){
+			return true;
+		}
+		return false;
 	}
 	
 	/**
@@ -102,6 +186,7 @@ public abstract class Pizza  {
 	 */
 	public final int getQuantity(){
 		// TO DO
+		return quantity;
 	}
 
 	/**
@@ -111,6 +196,7 @@ public abstract class Pizza  {
 	 */
 	public final String getPizzaType(){
 		// TO DO
+		return type;
 	}
 
 
@@ -136,5 +222,6 @@ public abstract class Pizza  {
 			(this.getQuantity()) == (otherPizza.getQuantity()));
 	}
 
+	
 	
 }
