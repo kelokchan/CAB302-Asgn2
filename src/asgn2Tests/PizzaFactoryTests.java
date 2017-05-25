@@ -20,7 +20,6 @@ import asgn2Pizzas.VegetarianPizza;
  * 
  */
 public class PizzaFactoryTests {
-	// TO DO
 	LocalTime orderTime;
 	LocalTime deliveryTime;
 	LocalTime openTime;

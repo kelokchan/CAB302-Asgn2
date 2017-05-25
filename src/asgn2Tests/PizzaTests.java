@@ -21,7 +21,6 @@ import asgn2Pizzas.PizzaTopping;
  *
  */
 public class PizzaTests {
-	// TO DO
 	MeatLoversPizza p;
 	MeatLoversPizza test;
 	LocalTime orderTime;

@@ -20,7 +20,6 @@ import asgn2Exceptions.CustomerException;
  *
  */
 public class CustomerTests {
-	// TO DO
 	DriverDeliveryCustomer driverDeliveryCust;
 	DroneDeliveryCustomer droneDeliveryCust;
 	PickUpCustomer pickupCust;

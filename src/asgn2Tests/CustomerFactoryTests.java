@@ -16,7 +16,6 @@ import asgn2Exceptions.CustomerException;
  *
  */
 public class CustomerFactoryTests {
-	// TO DO
 	String name = "David";
 	String mobileNumber = "0412341234";
 	int locationX = 1;
@@ -48,11 +47,11 @@ public class CustomerFactoryTests {
 	
 	@Test (expected = CustomerException.class)
 	public void invalidCustCodeWillThrowException() throws CustomerException {
-		Customer customer = CustomerFactory.getCustomer("DUH", name, mobileNumber, locationX, locationY);
+		CustomerFactory.getCustomer("DUH", name, mobileNumber, locationX, locationY);
 	}
 	
 	@Test (expected = CustomerException.class)
 	public void emptyCustCodeWIllThrowException() throws CustomerException {
-		Customer customer = CustomerFactory.getCustomer("", name, mobileNumber, locationX, locationY);
+		CustomerFactory.getCustomer("", name, mobileNumber, locationX, locationY);
 	}
 }
