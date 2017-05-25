@@ -51,4 +51,8 @@ public class CustomerFactoryTests {
 		Customer customer = CustomerFactory.getCustomer("DUH", name, mobileNumber, locationX, locationY);
 	}
 	
+	@Test (expected = CustomerException.class)
+	public void emptyCustCodeWIllThrowException() throws CustomerException {
+		Customer customer = CustomerFactory.getCustomer("", name, mobileNumber, locationX, locationY);
+	}
 }
