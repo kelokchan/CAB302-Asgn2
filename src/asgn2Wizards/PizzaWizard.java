@@ -1,6 +1,7 @@
 package asgn2Wizards;
 
 
+import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import asgn2GUIs.PizzaGUI;
