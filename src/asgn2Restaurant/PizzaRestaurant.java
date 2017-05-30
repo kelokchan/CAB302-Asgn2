@@ -3,6 +3,9 @@ package asgn2Restaurant;
 import java.util.ArrayList;
 
 import asgn2Customers.Customer;
+import asgn2Exceptions.CustomerException;
+import asgn2Exceptions.LogHandlerException;
+import asgn2Exceptions.PizzaException;
 import asgn2Pizzas.Pizza;
 
 /**
@@ -33,6 +36,8 @@ public class PizzaRestaurant {
 	 */
 	public PizzaRestaurant() {
 		// TO DO
+		customers = new ArrayList<Customer>();
+		pizzas = new ArrayList<Pizza>();
 	}
 
 	/**
@@ -52,6 +57,17 @@ public class PizzaRestaurant {
 	 */
 	public boolean processLog(String filename) throws CustomerException, PizzaException, LogHandlerException{
 		// TO DO
+		try {
+			customers = LogHandler.populateCustomerDataset(filename);
+			pizzas = LogHandler.populatePizzaDataset(filename);
+			return true;
+		} catch (CustomerException ce) {
+			throw new CustomerException(ce);
+		} catch (PizzaException pe) {
+			throw new PizzaException(pe);
+		} catch (LogHandlerException le) {
+			throw new LogHandlerException(le);
+		}
 	}
 
 	/**
@@ -62,6 +78,11 @@ public class PizzaRestaurant {
 	 */
 	public Customer getCustomerByIndex(int index) throws CustomerException{
 		// TO DO
+		if (index < 0 || index >= customers.size()) {
+			throw new CustomerException("Invalid index");
+		}
+		
+		return customers.get(index);
 	}
 	
 	/**
@@ -72,6 +93,11 @@ public class PizzaRestaurant {
 	 */	
 	public Pizza getPizzaByIndex(int index) throws PizzaException{
 		// TO DO
+		if (index < 0 || index >= customers.size()) {
+			throw new PizzaException("Invalid index");
+		}
+		
+		return pizzas.get(index);
 	}
 	
 	/**
@@ -82,6 +108,7 @@ public class PizzaRestaurant {
 	 */
 	public int getNumPizzaOrders(){
 		// TO DO
+		return pizzas.size();
 	}
 
 	/**
@@ -92,6 +119,7 @@ public class PizzaRestaurant {
 	 */
 	public int getNumCustomerOrders(){
 		// TO DO
+		return customers.size();
 	}
 
 			
@@ -103,6 +131,13 @@ public class PizzaRestaurant {
 	 */
 	public double getTotalDeliveryDistance(){
 		// TO DO
+		double totalDistance = 0.0;
+		
+		for (Customer customer : customers) {
+			totalDistance += customer.getDeliveryDistance();
+		}
+		
+		return totalDistance;
 	}
 
 	/**
@@ -112,6 +147,13 @@ public class PizzaRestaurant {
 	 */	
 	public double getTotalProfit(){
 		// TO DO
+		double totalProfit = 0.0;
+		
+		for (Pizza pizza : pizzas) {
+			totalProfit += pizza.getOrderProfit();
+		}
+		
+		return totalProfit;
 	}
 	
 	/**
@@ -122,6 +164,8 @@ public class PizzaRestaurant {
 	 */
 	public void resetDetails(){
 		// TO DO
+		customers.clear();
+		pizzas.clear();
 	}
 
 }
