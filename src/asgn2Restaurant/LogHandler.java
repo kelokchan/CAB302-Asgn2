@@ -1,12 +1,17 @@
 package asgn2Restaurant;
 
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import asgn2Customers.Customer;
+import asgn2Customers.CustomerFactory;
 import asgn2Exceptions.CustomerException;
 import asgn2Exceptions.LogHandlerException;
 import asgn2Exceptions.PizzaException;
 import asgn2Pizzas.Pizza;
+import asgn2Pizzas.PizzaFactory;
 
 /**
  *
@@ -19,7 +24,9 @@ import asgn2Pizzas.Pizza;
  */
 public class LogHandler {
 	
-
+	
+	static BufferedReader br;
+	public static final String COMMA = ",";
 
 	/**
 	 * Returns an ArrayList of Customer objects from the information contained in the log file ordered as they appear in the log file.
@@ -31,6 +38,23 @@ public class LogHandler {
 	 */
 	public static ArrayList<Customer> populateCustomerDataset(String filename) throws CustomerException, LogHandlerException{
 		// TO DO
+		ArrayList<Customer> customerList;
+
+		try {
+			customerList = new ArrayList<Customer>();
+			br = new BufferedReader(new FileReader(filename));
+			String line = br.readLine();
+			while(line != null) {
+				Customer customer = createCustomer(line);
+				customerList.add(customer);
+				line = br.readLine();
+			}			
+			return customerList;
+		} catch (CustomerException ce) {
+			throw new CustomerException(ce.getMessage());
+		} catch (Exception e) {
+			throw new LogHandlerException(e.getMessage());
+		}		
 	}		
 
 	/**
@@ -43,6 +67,23 @@ public class LogHandler {
 	 */
 	public static ArrayList<Pizza> populatePizzaDataset(String filename) throws PizzaException, LogHandlerException{
 		// TO DO
+		ArrayList<Pizza> pizzaList;
+
+		try {
+			pizzaList = new ArrayList<Pizza>();
+			br = new BufferedReader(new FileReader(filename));
+			String line = br.readLine();
+			while(line != null) {
+				Pizza pizza = createPizza(line);
+				pizzaList.add(pizza);
+				line = br.readLine();
+			}			
+			return pizzaList;
+		} catch (PizzaException pe) {
+			throw new PizzaException(pe.getMessage());
+		} catch (Exception e) {
+			throw new LogHandlerException(e.getMessage());
+		}	
 	}		
 
 	
@@ -56,6 +97,20 @@ public class LogHandler {
 	 */
 	public static Customer createCustomer(String line) throws CustomerException, LogHandlerException{
 		// TO DO
+		try {
+			String[] lineArr = line.split(COMMA);
+			String name = lineArr[2];
+			String mobileNumber = lineArr[3];
+			String customerCode = lineArr[4];
+			int locationX = Integer.parseInt(lineArr[5]);
+			int locationY = Integer.parseInt(lineArr[6]);
+			
+			return CustomerFactory.getCustomer(customerCode, name, mobileNumber, locationX, locationY);
+		} catch (CustomerException ce) {
+			throw new CustomerException("Semantic error");
+		} catch (Exception ce) {
+			throw new LogHandlerException("Error processing file");
+		}
 	}
 	
 	/**
@@ -67,7 +122,20 @@ public class LogHandler {
 	 * @throws LogHandlerException - If there was a problem parsing the line from the log file.
 	 */
 	public static Pizza createPizza(String line) throws PizzaException, LogHandlerException{
-		// TO DO		
+		// TO DO
+		try {
+			String[] lineArr = line.split(COMMA);
+			LocalTime orderTime = LocalTime.parse(lineArr[0]);
+			LocalTime deliveryTime = LocalTime.parse(lineArr[1]);
+			String pizzaCode = lineArr[7];
+			int quantity = Integer.parseInt(lineArr[8]);
+			
+			return PizzaFactory.getPizza(pizzaCode, quantity, orderTime, deliveryTime);
+		} catch (PizzaException pe) {
+			throw new PizzaException("Semantic error");
+		} catch (Exception ce) {
+			throw new LogHandlerException("Error processing file");
+		}
 	}
 
 }
