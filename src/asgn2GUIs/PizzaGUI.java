@@ -7,15 +7,20 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.swing.text.DefaultCaret;
 
 import asgn2Customers.Customer;
+import asgn2Exceptions.CustomerException;
+import asgn2Exceptions.PizzaException;
 import asgn2Pizzas.Pizza;
 import asgn2Restaurant.PizzaRestaurant;
 
 import java.awt.*;
+
+import javax.print.attribute.IntegerSyntax;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -97,66 +102,32 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 				File selectedFile = chooser.getSelectedFile();
 				try {
 					br = new File(selectedFile.getPath());
-					Scanner scnr = new Scanner(br);
-					int i = 0;
-					int j = 0;
-					array = new String[150][15];
-					while (scnr.hasNextLine()) {
-						String line = scnr.nextLine();
-						Scanner lineScanner = new Scanner(line);
-						lineScanner.useDelimiter(",");
-						while (lineScanner.hasNext()) {
-							String token = lineScanner.next();
-							if(token.equals("PZV")){
-								token = "Vegetarian";
-							}
-							if(token.equals("PZL")){
-								token = "Meat Lovers";
-							}
-							if(token.equals("PZM")){
-								token = "Margherita";
-							}
-							if(token.equals("DVC")){
-								token = "Driver Delivery";
-							}
-							if(token.equals("DNC")){
-								token = "Drone Delivery";
-							}
-							if(token.equals("PUC")){
-								token = "Pick Up";
-							}
-							array[j][i] = token;
-							i++;
-						}
-						i = 0;
-						j++;
-					}
-					String test[][] = new String[150][15];
-					for (int k = 0; k < 150; k++) {
-						test[k][0] = array[k][2];
-						test[k][1] = array[k][3];
-						test[k][2] = array[k][4];
-						test[k][3] = array[k][5];
-						test[k][4] = array[k][6];
-					}
-					String test2[][] = new String[150][15];
-					for (int k = 0; k < 150; k++) {
-						test2[k][0] = array[k][7];
-						test2[k][1] = array[k][8];
-
-					}
-					custModel = new DefaultTableModel(test, Custcolumns);
-					custTable = new JTable(custModel);
-					OrderModel = new DefaultTableModel(test2, Ordercolumns);
-					OrderTable = new JTable(OrderModel);
-
+					restaurant = new PizzaRestaurant();
+					restaurant.processLog(br.getPath());
 				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, "Error");
+					JOptionPane.showMessageDialog(null, e);
 				}
 			}
 		}
 		if (src == btnCust) {
 			if (br != null) {
+				String[][] custlist = new String[restaurant.getNumCustomerOrders()][6];
+				for (int i = 0; i < restaurant.getNumCustomerOrders(); i++) {		
+					try {
+					custlist[i][0] = restaurant.getCustomerByIndex(i).getName();
+					custlist[i][1] = restaurant.getCustomerByIndex(i).getMobileNumber();
+					custlist[i][2] = restaurant.getCustomerByIndex(i).getCustomerType();
+					custlist[i][3] = Integer.toString(restaurant.getCustomerByIndex(i).getLocationX());
+					custlist[i][4] = Integer.toString(restaurant.getCustomerByIndex(i).getLocationY());
+					custlist[i][5] = String.valueOf((restaurant.getCustomerByIndex(i).getDeliveryDistance()));
+					} catch (CustomerException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				custModel = new DefaultTableModel(custlist, Custcolumns);
+				custTable = new JTable(custModel);
 				tablepane.setViewportView(custTable);
 			} else {
 				JOptionPane.showMessageDialog(this, "No File Selected", "Error", JOptionPane.ERROR_MESSAGE);
@@ -165,14 +136,34 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 
 		if (src == btnOrder) {
 			if (br != null) {
+				String[][] orderlist = new String[restaurant.getNumPizzaOrders()][5];
+				for (int i = 0; i < restaurant.getNumCustomerOrders(); i++) {		
+
+					try {
+						orderlist[i][0] = restaurant.getPizzaByIndex(i).getPizzaType();
+	
+					orderlist[i][1] = Integer.toString(restaurant.getPizzaByIndex(i).getQuantity());
+					orderlist[i][2] = String.valueOf(restaurant.getPizzaByIndex(i).getOrderPrice());
+					orderlist[i][3] = String.valueOf(restaurant.getPizzaByIndex(i).getOrderCost());
+					orderlist[i][4] = String.valueOf(restaurant.getPizzaByIndex(i).getOrderProfit());
+					} catch (PizzaException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+				}
+				
+				OrderModel = new DefaultTableModel(orderlist, Ordercolumns);
+				OrderTable = new JTable(OrderModel);
 				tablepane.setViewportView(OrderTable);
 			} else {
-
 				JOptionPane.showMessageDialog(this, "No File Selected", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		if (src == btnReset) {
-
+			restaurant.resetDetails();
+			tablepane.setViewportView(null);
+			
 		}
 
 	}
