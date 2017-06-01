@@ -101,7 +101,7 @@ public abstract class Pizza  {
 				throw new PizzaException("Wrong Pizza Code!");
 		}
 		
-
+		calculateCostPerPizza();
 	}
 
 	/**
@@ -123,9 +123,6 @@ public abstract class Pizza  {
 	 */
 	public final double getCostPerPizza(){
 		// TO DO
-		// Reset the cost and calculate 
-		cost = 0;
-		calculateCostPerPizza();
 		return cost;
 	}
 
