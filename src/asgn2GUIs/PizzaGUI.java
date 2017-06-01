@@ -33,11 +33,9 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	 * To remove the no serialVersionUID set warning
 	 */
 	private static final long serialVersionUID = 1L;
-	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	public final int WIDTH = screenSize.width * 2 / 3;
-	public final int HEIGHT = screenSize.height * 2 / 3;
 
 	private PizzaRestaurant restaurant;
+	
 	private JPanel pnlOne;
 	private JPanel pnlBtn;
 	private JPanel pnlThree;
@@ -50,18 +48,20 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	private JButton btnCalProfit;
 
 	private JFileChooser chooser;
+	private JTable OrderTable;
+	private JScrollPane tablePane;
+	private File selectedFile;
 
-	String[] custColumnHeaders = new String[] { "Customer Name", "Mobile Number", "Customer Type", "Location-X",
-			"Location-Y", "Delivery Distance" };
-	String[] orderColumnHeaders = new String[] { "Pizza Type", "Quantity", "Order Price", "Order Cost",
-			"Order Profit" };
+	public final String[] CUST_TABLE_HEADERS = new String[] { "Customer Name", "Mobile Number", "Customer Type", "Location-X", "Location-Y", "Delivery Distance" };
+	public final String[] ORDER_TABLE_HEADERS = new String[] { "Pizza Type", "Quantity", "Order Price", "Order Cost", "Order Profit" };
+	
+	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	public final int WIDTH = screenSize.width * 2 / 3;
+	public final int HEIGHT = screenSize.height * 2 / 3;
 
 	private DefaultTableModel custModel;
 	private JTable custTable;
 	private DefaultTableModel OrderModel;
-	private JTable OrderTable;
-	private JScrollPane tablePane;
-	private File selectedFile = null;
 
 	/**
 	 * Creates a new Pizza GUI with the specified title 
@@ -99,6 +99,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 					selectedFile = new File(selectedFile.getPath());
 					restaurant = new PizzaRestaurant();
 					if (restaurant.processLog(selectedFile.getPath())) {
+						tablePane.setViewportView(null); //clear previously loaded table
 						JOptionPane.showMessageDialog(this, "Log file loaded successfully");
 					}
 				} catch (Exception e) {
@@ -123,7 +124,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 					}
 				}
 
-				custModel = new DefaultTableModel(custlist, custColumnHeaders) {
+				custModel = new DefaultTableModel(custlist, CUST_TABLE_HEADERS) {
 					/**
 					 * To remove the no serialVersionUID set warning
 					 */
@@ -156,7 +157,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 					}
 				}
 
-				OrderModel = new DefaultTableModel(orderlist, orderColumnHeaders) {
+				OrderModel = new DefaultTableModel(orderlist, ORDER_TABLE_HEADERS) {
 					/**
 					 * To remove the no serialVersionUID set warning
 					 */
@@ -182,7 +183,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		
 		if (src == btnCalProfit) {
 			if (selectedFile != null)
-				JOptionPane.showMessageDialog(this, "Total profie earned: $" + String.format("%.2f", restaurant.getTotalProfit()));
+				JOptionPane.showMessageDialog(this, "Total profit earned: $" + String.format("%.2f", restaurant.getTotalProfit()));
 			else
 				JOptionPane.showMessageDialog(this, "No File Selected", "Error", JOptionPane.ERROR_MESSAGE);
 		}
