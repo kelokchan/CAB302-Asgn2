@@ -11,8 +11,10 @@ import asgn2Restaurant.PizzaRestaurant;
 import java.awt.*;
 
 import javax.swing.*;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.IconView;
 
 /**
  * This class is the graphical user interface for the rest of the system.
@@ -33,9 +35,11 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	 * To remove the no serialVersionUID set warning
 	 */
 	private static final long serialVersionUID = 1L;
+	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	public final int WIDTH = screenSize.width * 2 / 3;
+	public final int HEIGHT = screenSize.height * 2 / 3;
 
 	private PizzaRestaurant restaurant;
-	
 	private JPanel pnlOne;
 	private JPanel pnlBtn;
 	private JPanel pnlThree;
@@ -48,20 +52,18 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	private JButton btnCalProfit;
 
 	private JFileChooser chooser;
-	private JTable OrderTable;
-	private JScrollPane tablePane;
-	private File selectedFile;
 
-	public final String[] CUST_TABLE_HEADERS = new String[] { "Customer Name", "Mobile Number", "Customer Type", "Location-X", "Location-Y", "Delivery Distance" };
-	public final String[] ORDER_TABLE_HEADERS = new String[] { "Pizza Type", "Quantity", "Order Price", "Order Cost", "Order Profit" };
-	
-	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	public final int WIDTH = screenSize.width * 2 / 3;
-	public final int HEIGHT = screenSize.height * 2 / 3;
+	String[] custColumnHeaders = new String[] { "Customer Name", "Mobile Number", "Customer Type", "Location-X",
+			"Location-Y", "Delivery Distance" };
+	String[] orderColumnHeaders = new String[] { "Pizza Type", "Quantity", "Order Price", "Order Cost",
+			"Order Profit" };
 
 	private DefaultTableModel custModel;
 	private JTable custTable;
 	private DefaultTableModel OrderModel;
+	private JTable OrderTable;
+	private JScrollPane tablePane;
+	private File selectedFile = null;
 
 	/**
 	 * Creates a new Pizza GUI with the specified title 
@@ -75,7 +77,18 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	@Override
 	public void run() {
 		// TO DO
-		createGUI();
+		try {
+		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+		        if ("Nimbus".equals(info.getName())) {
+		            UIManager.setLookAndFeel(info.getClassName());
+		            createGUI();
+		            break;
+		        }
+		    }
+		} catch (Exception e) {
+		    // If Nimbus is not available, you can set the GUI to another look and feel.
+		}
+		
 	}
 
 	@Override
@@ -99,8 +112,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 					selectedFile = new File(selectedFile.getPath());
 					restaurant = new PizzaRestaurant();
 					if (restaurant.processLog(selectedFile.getPath())) {
-						tablePane.setViewportView(null); //clear previously loaded table
 						JOptionPane.showMessageDialog(this, "Log file loaded successfully");
+						btnLog.setText(selectedFile.getName());
 					}
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -124,7 +137,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 					}
 				}
 
-				custModel = new DefaultTableModel(custlist, CUST_TABLE_HEADERS) {
+				custModel = new DefaultTableModel(custlist, custColumnHeaders) {
 					/**
 					 * To remove the no serialVersionUID set warning
 					 */
@@ -157,7 +170,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 					}
 				}
 
-				OrderModel = new DefaultTableModel(orderlist, ORDER_TABLE_HEADERS) {
+				OrderModel = new DefaultTableModel(orderlist, orderColumnHeaders) {
 					/**
 					 * To remove the no serialVersionUID set warning
 					 */
@@ -179,11 +192,12 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 			restaurant.resetDetails();
 			selectedFile = null;
 			tablePane.setViewportView(null);
+			btnLog.setText("Load a Log File");
 		}
 		
 		if (src == btnCalProfit) {
 			if (selectedFile != null)
-				JOptionPane.showMessageDialog(this, "Total profit earned: $" + String.format("%.2f", restaurant.getTotalProfit()));
+				JOptionPane.showMessageDialog(this, "Total profie earned: $" + String.format("%.2f", restaurant.getTotalProfit()));
 			else
 				JOptionPane.showMessageDialog(this, "No File Selected", "Error", JOptionPane.ERROR_MESSAGE);
 		}
@@ -205,7 +219,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		pnlBtn = createPanel(Color.LIGHT_GRAY);
 		pnlThree = createPanel(Color.LIGHT_GRAY);
 
-		btnLog = createButton("Load a Log file");
+		btnLog = createButton("Load a Log File");
 		btnReset = createButton("Reset");
 		btnCust = createButton("Customer Details");
 		btnOrder = createButton("Order Details");
@@ -224,11 +238,13 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		this.setLocation(screenSize.width / 2 - this.getSize().width / 2,
 				screenSize.height / 2 - this.getSize().height / 2);
 		pack();
+		System.out.println(Integer.valueOf(btnCalProfit.getHeight()));
 	}
 
 	private JButton createButton(String str) {
 		JButton var = new JButton(str);
 		var.addActionListener(this);
+		var.setPreferredSize(new Dimension(230, 50));
 		return var;
 	}
 
@@ -248,13 +264,20 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		constraints.weightx = 100;
 		constraints.weighty = 100;
 
+		btnLog.setFont(new Font("Garamond", Font.BOLD, 15));
+		btnReset.setFont(new Font("Garamond", Font.BOLD, 15));
+		btnOrder.setFont(new Font("Garamond", Font.BOLD, 15));
+		btnCust.setFont(new Font("Garamond", Font.BOLD, 15));
+		btnCalDist.setFont(new Font("Garamond", Font.BOLD, 15));
+		btnCalProfit.setFont(new Font("Garamond", Font.BOLD, 15));
+		
 		addToPanel(pnlBtn, btnLog, constraints, 0, 0, 2, 1);
 		addToPanel(pnlBtn, btnReset, constraints, 0, 2, 2, 1);
 		addToPanel(pnlBtn, btnOrder, constraints, 3, 0, 2, 1);
 		addToPanel(pnlBtn, btnCust, constraints, 3, 2, 2, 1);
 		addToPanel(pnlBtn, btnCalDist, constraints, 5, 0, 2, 1);
 		addToPanel(pnlBtn, btnCalProfit, constraints, 5, 2, 2, 1);
-
+		
 		btnLog.setMargin(new Insets(10, 10, 10, 10));
 		btnReset.setMargin(new Insets(10, 10, 10, 10));
 		btnOrder.setMargin(new Insets(10, 10, 10, 10));
