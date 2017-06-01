@@ -106,11 +106,6 @@ public class PizzaTests {
 	}
 	
 	@Test
-	public void getInitialPizzaCost(){
-		assertEquals(p.getCostPerPizza(), 0.0, 0.000);
-	}
-	
-	@Test
 	public void getPerPizzaPrice(){
 		assertEquals(p.getPricePerPizza(), 12.0, 0.000);
 	}
@@ -127,24 +122,16 @@ public class PizzaTests {
 	
 	@Test
 	public void getInitialCostPerPizza(){
-		p.calculateCostPerPizza();
 		assertEquals(p.getCostPerPizza(), 5, 0.000);
 	}
 	
 	@Test
 	public void calculateCostPerPizza(){
-		p.calculateCostPerPizza();
 		assertEquals(p.getCostPerPizza(), 5, 0.000);
 	}
 	
 	@Test
-	public void getInitialOrderCost(){
-		assertEquals(p.getOrderCost(), 0.0, 0.000);
-	}
-	
-	@Test
 	public void getCalculatedOrderCost(){
-		p.calculateCostPerPizza();
 		assertEquals(p.getOrderCost(), 25.0, 0.000);
 	}
 	
@@ -155,7 +142,6 @@ public class PizzaTests {
 	
 	@Test
 	public void getOrderProfit(){
-		p.calculateCostPerPizza();
 		assertEquals(p.getOrderProfit(), 35.0, 0.000);
 	}
 }
