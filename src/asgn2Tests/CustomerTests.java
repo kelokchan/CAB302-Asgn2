@@ -106,4 +106,27 @@ public class CustomerTests {
 		droneDeliveryCust = new DroneDeliveryCustomer("Test", "0412341234", -3, -4);
 		assertEquals(5.0, droneDeliveryCust.getDeliveryDistance(), 0.000);
 	}
+	
+	@Test
+	public void driverCustomergetDeliveryDistanceReturnManhattanDistance() {
+		assertEquals(2.0, driverDeliveryCust.getDeliveryDistance(), 0.000);
+	}
+	
+	@Test
+	public void driverCustNegativeLocationXReturnsDeliveryDistanceCorrectly() throws CustomerException {
+		driverDeliveryCust = new DriverDeliveryCustomer("Test", "0412341234", -3, 4);
+		assertEquals(7.0, driverDeliveryCust.getDeliveryDistance(), 0.000);
+	}
+	
+	@Test
+	public void driverCustNegativeLocationYReturnsDeliveryDistanceCorrectly() throws CustomerException {
+		driverDeliveryCust = new DriverDeliveryCustomer("Test", "0412341234", 3, -4);
+		assertEquals(7.0, driverDeliveryCust.getDeliveryDistance(), 0.000);
+	}
+	
+	@Test
+	public void driverCustNegativeLocationXYReturnsDeliveryDistanceCorrectly() throws CustomerException {
+		driverDeliveryCust = new DriverDeliveryCustomer("Test", "0412341234", -3, -4);
+		assertEquals(7.0, driverDeliveryCust.getDeliveryDistance(), 0.000);
+	}
 }
