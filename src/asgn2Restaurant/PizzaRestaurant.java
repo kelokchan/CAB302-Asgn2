@@ -93,7 +93,7 @@ public class PizzaRestaurant {
 	 */	
 	public Pizza getPizzaByIndex(int index) throws PizzaException{
 		// TO DO
-		if (index < 0 || index >= customers.size()) {
+		if (index < 0 || index >= pizzas.size()) {
 			throw new PizzaException("Invalid index");
 		}
 		

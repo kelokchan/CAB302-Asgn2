@@ -20,17 +20,10 @@ import asgn2Pizzas.VegetarianPizza;
  * 
  */
 public class PizzaFactoryTests {
-	LocalTime orderTime;
-	LocalTime deliveryTime;
+	LocalTime orderTime = LocalTime.parse("20:00:00");
+	LocalTime deliveryTime = LocalTime.parse("20:15:00");
 	LocalTime openTime;
 	LocalTime closeTime;
-	
-	@Before
-	public void setUp() throws Exception {
-		orderTime = LocalTime.parse("20:00:00");
-		deliveryTime = LocalTime.parse("20:15:00");
-		
-	}
 	
 	@Test (expected = PizzaException.class)
 	public void wrongPizzaCode() throws PizzaException {

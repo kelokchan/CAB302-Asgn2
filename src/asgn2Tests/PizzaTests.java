@@ -128,8 +128,7 @@ public class PizzaTests {
 		assertEquals(10.0, vp.getPricePerPizza(), 0.000);
 		assertEquals(12.0, mlp.getPricePerPizza(), 0.000);
 	}
-	
-	
+		
 	@Test
 	public void getCostPerPizza(){
 		assertEquals(1.5, mp.getCostPerPizza(), 0.000);
