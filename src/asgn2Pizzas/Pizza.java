@@ -20,7 +20,6 @@ public abstract class Pizza  {
 	LocalTime orderTime, deliveryTime;
 	String type;
 	double price;
-	
 	double cost;
 	double orderCost;
 	double orderPrice;
@@ -48,15 +47,16 @@ public abstract class Pizza  {
 		LocalTime openTime = LocalTime.parse("19:00:00");
 		LocalTime closeTime = LocalTime.parse("23:00:00");
 
-		this.cost = 0;
+		this.cost = 0.0;
 		this.quantity = quantity;
 		this.orderTime = orderTime;
 		this.deliveryTime = deliveryTime;
 		this.type = type;
 		this.price = price;
-		this.orderCost = 0;
-		this.orderPrice = 0;
-		this.orderProfit = 0;
+		this.orderCost = 0.0;
+		this.orderPrice = 0.0;
+		this.orderProfit = 0.0;
+		
 		if (orderTime.isBefore(openTime)) {
 			throw new PizzaException("Kitchen is not open yet!");
 		}
@@ -123,6 +123,9 @@ public abstract class Pizza  {
 	 */
 	public final double getCostPerPizza(){
 		// TO DO
+		// Reset the cost and calculate 
+		cost = 0;
+		calculateCostPerPizza();
 		return cost;
 	}
 
@@ -141,7 +144,7 @@ public abstract class Pizza  {
 	 */
 	public final double getOrderCost(){
 		// TO DO
-		orderCost = getCostPerPizza() * quantity;
+		orderCost = (getCostPerPizza() * quantity);
 		return orderCost;
 	}
 	
@@ -151,7 +154,7 @@ public abstract class Pizza  {
 	 */
 	public final double getOrderPrice(){
 		// TO DO
-		orderPrice = getPricePerPizza() * quantity;
+		orderPrice = (getPricePerPizza() * quantity);
 		return orderPrice;
 	}
 	

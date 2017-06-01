@@ -107,9 +107,9 @@ public class LogHandler {
 			
 			return CustomerFactory.getCustomer(customerCode, name, mobileNumber, locationX, locationY);
 		} catch (CustomerException ce) {
-			throw new CustomerException("Semantic error");
+			throw new CustomerException(ce.getMessage());
 		} catch (Exception ce) {
-			throw new LogHandlerException("Error processing file");
+			throw new LogHandlerException(ce.getMessage());
 		}
 	}
 	
@@ -132,9 +132,9 @@ public class LogHandler {
 			
 			return PizzaFactory.getPizza(pizzaCode, quantity, orderTime, deliveryTime);
 		} catch (PizzaException pe) {
-			throw new PizzaException("Semantic error");
+			throw new PizzaException(pe.getMessage());
 		} catch (Exception ce) {
-			throw new LogHandlerException("Error processing file");
+			throw new LogHandlerException(ce.getMessage());
 		}
 	}
 
