@@ -34,8 +34,10 @@ public class LogHandler {
 	 * @param filename The file name of the log file
 	 * @return an ArrayList of Customer objects from the information contained in the log file ordered as they appear in the log file. 
 	 * @throws CustomerException If the log file contains semantic errors leading that violate the customer constraints listed in Section 5.3 of the Assignment Specification or contain an invalid customer code (passed by another class).
-	 * @throws LogHandlerException If there was a problem with the log file not related to the semantic errors above
-	 * 
+	 * @throws LogHandlerException If there was a problem with the log file not related to the semantic errors above such as:
+	 * 						1. Inability to parse location X and Y string to integer format (unparseable type, overflow)
+	 * 						2. File type is not .txt or equivalent
+	 * 						3. String array after split out of bound
 	 */
 	public static ArrayList<Customer> populateCustomerDataset(String filename) throws CustomerException, LogHandlerException{
 		
@@ -63,7 +65,11 @@ public class LogHandler {
 	 * @param filename The file name of the log file
 	 * @return an ArrayList of Pizza objects from the information contained in the log file ordered as they appear in the log file. .
 	 * @throws PizzaException If the log file contains semantic errors leading that violate the pizza constraints listed in Section 5.3 of the Assignment Specification or contain an invalid pizza code (passed by another class).
-	 * @throws LogHandlerException If there was a problem with the log file not related to the semantic errors above
+	 * @throws LogHandlerException If there was a problem with the log file not related to the semantic errors above such as:
+	 * 						1. Inability to parse orderTime/deliveryTime to LocalTime (unparseable type)
+	 * 						2. File type is not .txt or equivalent (File is not a text file)
+	 * 						3. Inability to parse quantity to integer format (unparseable type)
+	 * 						4. String array after split out of bound
 	 * 
 	 */
 	public static ArrayList<Pizza> populatePizzaDataset(String filename) throws PizzaException, LogHandlerException{
@@ -94,7 +100,10 @@ public class LogHandler {
 	 * @param line - A line from the log file
 	 * @return- A Customer object containing the information from the line in the log file
 	 * @throws CustomerException - If the log file contains semantic errors leading that violate the customer constraints listed in Section 5.3 of the Assignment Specification or contain an invalid customer code (passed by another class).
-	 * @throws LogHandlerException - If there was a problem parsing the line from the log file.
+	 * @throws LogHandlerException - If there was a problem parsing the line from the log file such as:
+	 * 						1. Inability to parse location X and Y string to integer format (unparseable type, overflow)
+	 * 						2. File type is not .txt or equivalent
+	 * 						3. String array after split out of bound
 	 */
 	public static Customer createCustomer(String line) throws CustomerException, LogHandlerException{
 		
@@ -120,7 +129,11 @@ public class LogHandler {
 	 * @param line - A line from the log file
 	 * @return- A Pizza object containing the information from the line in the log file
 	 * @throws PizzaException If the log file contains semantic errors leading that violate the pizza constraints listed in Section 5.3 of the Assignment Specification or contain an invalid pizza code (passed by another class).
-	 * @throws LogHandlerException - If there was a problem parsing the line from the log file.
+	 * @throws LogHandlerException - If there was a problem parsing the line from the log file such as:
+	 * 						1. Inability to parse orderTime/deliveryTime to LocalTime (unparseable type)
+	 * 						2. File type is not .txt or equivalent (File is not a text file)
+	 * 						3. Inability to parse quantity to integer format (unparseable type)
+	 * 						4. String array after split out of bound
 	 */
 	public static Pizza createPizza(String line) throws PizzaException, LogHandlerException{
 		

@@ -1,0 +1,315 @@
+* b1712d1 : -Fixed some bugs in the Unit Tests
+* b67e373 : -Makes some improvements
+*   9a6578b : Merge pull request #7 from kelokchan/dev
+|\  
+| * 64056da : - Renamed test files to be more clear
+| *   adf7cfd : Merge pull request #6 from kelokchan/garyRestCustTest
+| |\  
+| | * 15e50ac : -Made some changes in GUI, Added Restaurant Customer Test Cases, Added Some new cases in Customer Tests
+| |/  
+| * fdd66e6 : - Finished LogHandlerPizzaTests
+| *   482b303 : Merge remote-tracking branch 'origin/dev' into kuokkitPizzaTestsV2
+| |\  
+| | *   ff52ce2 : Merge pull request #5 from kelokchan/garyLogRestaurantTest
+| | |\  
+| | | * fe9c230 : -Done LogHandler Customer test -Added some unit test Text Files
+| | |/  
+| * | a9e99ef : - Complete PizzaTests
+| |/  
+| * da39534 : refactored get pizza cost
+| *   77e180d : Merge pull request #4 from kelokchan/kuokkitGUIv2
+| |\  
+| | * 3cedc71 : Added 2 buttons for calculating total profit and total travel distance.
+| |/  
+| *   caf4d6f : Merge pull request #3 from kelokchan/garyGUI
+| |\  
+| | * cd39c4a : -GUI Basic Function Done
+| | *   a678c66 : Merge remote-tracking branch 'origin/dev' into garyGUI
+| | |\  
+| | |/  
+| |/|   
+| * |   2f6fa57 : Merge pull request #2 from kelokchan/kuokkitLogPizzaRestaurant
+| |\ \  
+| | * | 0481ac6 : - Completed PizzaRestaurant Code
+| | * | 8300e70 : - finished LogHandlder
+| |/ /  
+| | * 44ce218 : -Load File to Table
+| | * 7d20e30 : -Created a simple GUI -Able to load Text File and display the text area
+| |/  
+| * 79d68e7 : Merged new garyPizza branch code
+| *   76e00b6 : Merge remote-tracking branch 'origin/garyPizza' into dev
+| |\  
+| | * b8632e5 : -Added a test
+| * |   aa73773 : Merged initial branch into dev branch
+| |\ \  
+| | |/  
+| | * 435673e : -Added Pizza Class -Added Customer Tests
+| |/  
+|/|   
+| * b77e22d : Added Customer code and Pizza unit tests
+|/  
+* 7dbe904 : Fixed typos
+* 6c318c6 : Changed PizzaResturant.processLog to say 'true if the file was process correctly'
+* d209e25 : Updating log files to remove empty final line
+* 434d3ad : .
+* f748592 : .
+* dfba347 : .
+* e951c1e : .commit b1712d166a48ed8a3100224b58ef5c1795e5d839
+Author: GaryVLC <leechunvoo@gmail.com>
+Date:   Fri Jun 2 19:44:05 2017 +1000
+
+    -Fixed some bugs in the Unit Tests
+
+commit b67e373b043354fa6864baf607a42f51cc85500b
+Author: GaryVLC <leechunvoo@gmail.com>
+Date:   Fri Jun 2 17:21:20 2017 +1000
+
+    -Makes some improvements
+
+commit 9a6578b3f76a92d9e82f0edc2b3dc9a275171df6
+Merge: 7dbe904 64056da
+Author: Kelok Chan <kelokchan@gmail.com>
+Date:   Fri Jun 2 15:02:14 2017 +1000
+
+    Merge pull request #7 from kelokchan/dev
+    
+    Dev
+
+commit 64056dafc5ad02ddeb0932cbf5661e89bd0bd689
+Author: Kelok <kelokchan@gmail.com>
+Date:   Fri Jun 2 15:01:25 2017 +1000
+
+    - Renamed test files to be more clear
+    
+    - Renamed Person A and Person B
+    
+    - Removed all // TO DO
+    
+    - Finished all GUI
+
+commit adf7cfdff8b1120e812e5b664b040e765621b7de
+Merge: fdd66e6 15e50ac
+Author: Kelok Chan <kelokchan@gmail.com>
+Date:   Fri Jun 2 00:23:53 2017 +1000
+
+    Merge pull request #6 from kelokchan/garyRestCustTest
+    
+    Final merging
+    
+    All tests complete
+
+commit 15e50ac1db6d9e57e486b658f255861575e4461a
+Author: GaryVLC <leechunvoo@gmail.com>
+Date:   Fri Jun 2 00:19:40 2017 +1000
+
+    -Made some changes in GUI, Added Restaurant Customer Test Cases, Added
+    Some new cases in Customer Tests
+
+commit fdd66e6a7042ef3858e591b5c694b008d0087e7b
+Author: Kelok <kelokchan@gmail.com>
+Date:   Thu Jun 1 23:48:38 2017 +1000
+
+    - Finished LogHandlerPizzaTests
+    
+    - Finished RestaurantPizzaTests
+    
+    - Added InvalidCustCode and InvalidPizzaCode test logs
+
+commit 482b3031ff82f26d0cc4e1f211fdfa16ef44609c
+Merge: a9e99ef ff52ce2
+Author: Kelok <kelokchan@gmail.com>
+Date:   Thu Jun 1 23:17:34 2017 +1000
+
+    Merge remote-tracking branch 'origin/dev' into kuokkitPizzaTestsV2
+
+commit ff52ce2201b3511b3052734343b28b3bad32ada4
+Merge: da39534 fe9c230
+Author: Kelok Chan <kelokchan@gmail.com>
+Date:   Thu Jun 1 23:16:47 2017 +1000
+
+    Merge pull request #5 from kelokchan/garyLogRestaurantTest
+    
+    -Request to merge
+
+commit fe9c230bd8fa2e6b1ccce82f05b36928d1f7d034
+Author: GaryVLC <leechunvoo@gmail.com>
+Date:   Thu Jun 1 23:07:15 2017 +1000
+
+    -Done LogHandler Customer test
+    -Added some unit test Text Files
+
+commit a9e99ef3447af9e0f0df784e37dabe2a81e701dd
+Author: Kelok <kelokchan@gmail.com>
+Date:   Thu Jun 1 18:02:10 2017 +1000
+
+    - Complete PizzaTests
+    
+    - Fixed PizzaTests errors
+    
+    - Clean up PizzaGUI
+
+commit da39534b9f8b6c6c9f9be4ce54aaff0df95df967
+Author: Kelok <kelokchan@gmail.com>
+Date:   Thu Jun 1 15:31:06 2017 +1000
+
+    refactored get pizza cost
+
+commit 77e180d3c3b77b0ea5fd27e01cdfce15d8375a5b
+Merge: caf4d6f 3cedc71
+Author: Kelok Chan <kelokchan@gmail.com>
+Date:   Thu Jun 1 13:20:41 2017 +0800
+
+    Merge pull request #4 from kelokchan/kuokkitGUIv2
+    
+    Kuokkit gui v2
+
+commit 3cedc71019e7cbb7af65e6aaf4e614190b45d592
+Author: Kelok <kelokchan@gmail.com>
+Date:   Thu Jun 1 15:19:46 2017 +1000
+
+    Added 2 buttons for calculating total profit and total travel distance.
+    
+    Fixed pizza cost calculation
+
+commit caf4d6fd75cf7d9ae8bdffb7d80cdb7254dde691
+Merge: 2f6fa57 cd39c4a
+Author: Kelok Chan <kelokchan@gmail.com>
+Date:   Wed May 31 17:48:02 2017 +1000
+
+    Merge pull request #3 from kelokchan/garyGUI
+    
+    Gary gui
+
+commit cd39c4a895b9a443bc5421cd6cd5d69e06bd81da
+Author: GaryVLC <leechunvoo@gmail.com>
+Date:   Wed May 31 17:24:33 2017 +1000
+
+    -GUI Basic Function Done
+
+commit a678c6699abf99ac3fd435fab9df1981d0c64535
+Merge: 44ce218 2f6fa57
+Author: GaryVLC <leechunvoo@gmail.com>
+Date:   Wed May 31 15:40:05 2017 +1000
+
+    Merge remote-tracking branch 'origin/dev' into garyGUI
+
+commit 2f6fa5714a607682fefe39ffd7a1e0ff1cd94792
+Merge: 79d68e7 0481ac6
+Author: Gary Voo <leechunvoo@gmail.com>
+Date:   Wed May 31 15:37:07 2017 +1000
+
+    Merge pull request #2 from kelokchan/kuokkitLogPizzaRestaurant
+    
+    Kuokkit log pizza restaurant
+
+commit 44ce2187ab8ed1e76d608df2eed0633c28b70f61
+Author: GaryVLC <leechunvoo@gmail.com>
+Date:   Wed May 31 12:04:26 2017 +1000
+
+    -Load File to Table
+
+commit 0481ac65cdc377427122eafb41f0fe012dca91f0
+Author: Kelok <kelokchan@gmail.com>
+Date:   Tue May 30 16:51:06 2017 +1000
+
+    - Completed PizzaRestaurant Code
+
+commit 8300e700246a46d3c8e9c315b8bc6a145bc26ed6
+Author: Kelok <kelokchan@gmail.com>
+Date:   Tue May 30 16:13:05 2017 +1000
+
+    - finished LogHandlder
+    
+    - Started LogHandlerTest skeleton
+
+commit 7d20e30129e33ff65275c05afe47ae3fa9b95159
+Author: GaryVLC <leechunvoo@gmail.com>
+Date:   Tue May 30 14:49:31 2017 +1000
+
+    -Created a simple GUI
+    -Able to load Text File and display the text area
+
+commit 79d68e7544bf7ecdc514ba9a9faf241d6d6a6798
+Author: Kelok <kelokchan@gmail.com>
+Date:   Thu May 25 15:09:04 2017 +1000
+
+    Merged new garyPizza branch code
+    
+    Removed some unused TODO comments
+
+commit 76e00b6329148d7158db149976f994107574fb95
+Merge: aa73773 b8632e5
+Author: Kelok <kelokchan@gmail.com>
+Date:   Thu May 25 15:04:56 2017 +1000
+
+    Merge remote-tracking branch 'origin/garyPizza' into dev
+
+commit b8632e51e90cb76cff056586c5d8b52019b53246
+Author: GaryVLC <leechunvoo@gmail.com>
+Date:   Thu May 25 15:03:21 2017 +1000
+
+    -Added a test
+
+commit aa737738db2880ab5fc4cf3914c1e8f8499dfb13
+Merge: b77e22d 435673e
+Author: Kelok <kelokchan@gmail.com>
+Date:   Thu May 25 15:00:25 2017 +1000
+
+    Merged initial branch into dev branch
+    
+    Fixed CustomerFactory conflict
+
+commit 435673e4f7d8f3ddb28a210462ecc4f0f6f7661d
+Author: GaryVLC <leechunvoo@gmail.com>
+Date:   Thu May 25 14:05:43 2017 +1000
+
+    -Added Pizza Class
+    -Added Customer Tests
+
+commit b77e22d7cb190e7c192b71d8ec89afd4396f75c6
+Author: Kelok <kelokchan@gmail.com>
+Date:   Thu May 25 13:46:29 2017 +1000
+
+    Added Customer code and Pizza unit tests
+
+commit 7dbe90423b6813ca34e96d1fe9842db7ba03687c
+Author: alan <awoodley@qut.edu.au>
+Date:   Fri May 5 17:04:42 2017 +1000
+
+    Fixed typos
+
+commit 6c318c6355efac47ebaa1b4fbebad97b232c2e2e
+Author: alan <awoodley@qut.edu.au>
+Date:   Fri May 5 17:02:09 2017 +1000
+
+    Changed PizzaResturant.processLog to say 'true if the file was process correctly'
+
+commit d209e252f0d37ea6593fdbaf85b7eeb820a79667
+Author: alan <awoodley@qut.edu.au>
+Date:   Fri May 5 16:52:17 2017 +1000
+
+    Updating log files to remove empty final line
+
+commit 434d3ada012f0e03d37b9527d8f9bdff01ca572b
+Author: alan <awoodley@qut.edu.au>
+Date:   Tue Apr 25 18:36:28 2017 +1000
+
+    .
+
+commit f748592b2f1fe58edc493dfacce042ef85c91244
+Author: alan <awoodley@qut.edu.au>
+Date:   Tue Apr 25 18:05:34 2017 +1000
+
+    .
+
+commit dfba34718a2fd75e1bc3721b8770c7466003ab56
+Author: alan <awoodley@qut.edu.au>
+Date:   Tue Apr 25 18:04:54 2017 +1000
+
+    .
+
+commit e951c1e8b6ea69b11df52b6f3f175173c920375e
+Author: awoodley <a.woodley@qut.edu.au>
+Date:   Tue Apr 25 06:32:36 2017 +0000
+
+    .

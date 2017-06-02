@@ -36,6 +36,7 @@ public class LogHandlerPizzaTests {
 	final static String FILE_16 = Paths.get("logs/Unit_Test/Pizza/OverMinuteLimitAtOrderTime").toString();
 	final static String FILE_17 = Paths.get("logs/Unit_Test/Pizza/NegativeValueAtOrderTime.txt").toString();
 	final static String FILE_18 = Paths.get("logs/Unit_Test/Pizza/DoubleFormatQuantity.txt").toString();
+	final static String FILE_19 = Paths.get("logs/Unit_Test/InsufficientData.txt").toString();
 
 	@Before
 	public void setUp() throws Exception {
@@ -77,58 +78,63 @@ public class LogHandlerPizzaTests {
 	}
 
 	@Test(expected = LogHandlerException.class)
-	public void OverHourLimitAtDeliveryTime() throws PizzaException, LogHandlerException {
+	public void overHourLimitAtDeliveryTime() throws PizzaException, LogHandlerException {
 		LogHandler.populatePizzaDataset(FILE_8);
 	}
 
 	@Test(expected = LogHandlerException.class)
-	public void OverMinuteLimitAtDeliveryTime() throws PizzaException, LogHandlerException {
+	public void overMinuteLimitAtDeliveryTime() throws PizzaException, LogHandlerException {
 		LogHandler.populatePizzaDataset(FILE_9);
 	}
 
 	@Test(expected = LogHandlerException.class)
-	public void InvalidFormatAtDeliveryTime() throws PizzaException, LogHandlerException {
+	public void invalidFormatAtDeliveryTime() throws PizzaException, LogHandlerException {
 		LogHandler.populatePizzaDataset(FILE_10);
 	}
 
 	@Test(expected = LogHandlerException.class)
-	public void DoubleValueAtDeliveryTime() throws PizzaException, LogHandlerException {
+	public void doubleValueAtDeliveryTime() throws PizzaException, LogHandlerException {
 		LogHandler.populatePizzaDataset(FILE_11);
 	}
 
 	@Test(expected = LogHandlerException.class)
-	public void NegativeValueAtDeliveryTime() throws PizzaException, LogHandlerException {
+	public void negativeValueAtDeliveryTime() throws PizzaException, LogHandlerException {
 		LogHandler.populatePizzaDataset(FILE_12);
 	}
 
 	@Test(expected = LogHandlerException.class)
-	public void OverHourLimitAtOrderTime() throws PizzaException, LogHandlerException {
+	public void overHourLimitAtOrderTime() throws PizzaException, LogHandlerException {
 		LogHandler.populatePizzaDataset(FILE_13);
 	}
 
 	@Test(expected = LogHandlerException.class)
-	public void InvalidFormatAtOrderTime() throws PizzaException, LogHandlerException {
+	public void invalidFormatAtOrderTime() throws PizzaException, LogHandlerException {
 		LogHandler.populatePizzaDataset(FILE_14);
 	}
 
 	@Test(expected = LogHandlerException.class)
-	public void DoubleValueAtOrderTime() throws PizzaException, LogHandlerException {
+	public void doubleValueAtOrderTime() throws PizzaException, LogHandlerException {
 		LogHandler.populatePizzaDataset(FILE_15);
 	}
 
 	@Test(expected = LogHandlerException.class)
-	public void OverMinuteLimitAtOrderTime() throws PizzaException, LogHandlerException {
+	public void overMinuteLimitAtOrderTime() throws PizzaException, LogHandlerException {
 		LogHandler.populatePizzaDataset(FILE_16);
 	}
 
 	@Test(expected = LogHandlerException.class)
-	public void NegativeValueAtOrderTime() throws PizzaException, LogHandlerException {
+	public void negativeValueAtOrderTime() throws PizzaException, LogHandlerException {
 		LogHandler.populatePizzaDataset(FILE_17);
 	}
 
 	@Test(expected = LogHandlerException.class)
-	public void DoubleFormatQuantity() throws PizzaException, LogHandlerException {
+	public void doubleFormatQuantity() throws PizzaException, LogHandlerException {
 		LogHandler.populatePizzaDataset(FILE_18);
+	}
+	
+	@Test(expected = LogHandlerException.class)
+	public void insufficientDataWillThrowException() throws PizzaException, LogHandlerException {
+		LogHandler.populatePizzaDataset(FILE_19);
 	}
 
 	@Test(expected = LogHandlerException.class)
@@ -149,57 +155,62 @@ public class LogHandlerPizzaTests {
 	}
 
 	@Test(expected = LogHandlerException.class)
-	public void DoubleFormatQuantityWillThrowExceptionForCreatePizza() throws PizzaException, LogHandlerException {
+	public void doubleFormatQuantityWillThrowExceptionForCreatePizza() throws PizzaException, LogHandlerException {
 		LogHandler.createPizza("19:00:00,19:20:00,Casey Jones,0123456789,DVC,10,5,PZV,2.50");
 	}
 
 	@Test(expected = LogHandlerException.class)
-	public void OverHourLimitAtDeliveryTimeForCreatePizza() throws PizzaException, LogHandlerException {
+	public void overHourLimitAtDeliveryTimeForCreatePizza() throws PizzaException, LogHandlerException {
 		LogHandler.createPizza("19:00:00,159:20:00,Casey Jones,0123456789,DVC,10,5,PZV,2");
 	}
 
 	@Test(expected = LogHandlerException.class)
-	public void OverMinuteLimitAtDeliveryTimeForCreatePizza() throws PizzaException, LogHandlerException {
+	public void overMinuteLimitAtDeliveryTimeForCreatePizza() throws PizzaException, LogHandlerException {
 		LogHandler.createPizza("19:00:00,19:75:00,Casey Jones,0123456789,DVC,10,5,PZV,2");
 	}
 
 	@Test(expected = LogHandlerException.class)
-	public void InvalidFormatAtDeliveryTimeForCreatePizza() throws PizzaException, LogHandlerException {
+	public void invalidFormatAtDeliveryTimeForCreatePizza() throws PizzaException, LogHandlerException {
 		LogHandler.createPizza("19:00:00,asdasd,Casey Jones,0123456789,DVC,10,5,PZV,2");
 	}
 
 	@Test(expected = LogHandlerException.class)
-	public void DoubleValueAtDeliveryTimeForCreatePizza() throws PizzaException, LogHandlerException {
+	public void doubleValueAtDeliveryTimeForCreatePizza() throws PizzaException, LogHandlerException {
 		LogHandler.createPizza("19:00:00,19.50,Casey Jones,0123456789,DVC,10,5,PZV,2");
 	}
 
 	@Test(expected = LogHandlerException.class)
-	public void NegativeValueAtDeliveryTimeForCreatePizza() throws PizzaException, LogHandlerException {
+	public void negativeValueAtDeliveryTimeForCreatePizza() throws PizzaException, LogHandlerException {
 		LogHandler.createPizza("19:00:00,-19:20:00,Casey Jones,0123456789,DVC,10,5,PZV,2");
 	}
 
 	@Test(expected = LogHandlerException.class)
-	public void OverHourLimitAtOrderTimeForCreatePizza() throws PizzaException, LogHandlerException {
+	public void overHourLimitAtOrderTimeForCreatePizza() throws PizzaException, LogHandlerException {
 		LogHandler.createPizza("305:00:00,19:20:00,Casey Jones,0123456789,DVC,10,5,PZV,2");
 	}
 
 	@Test(expected = LogHandlerException.class)
-	public void InvalidFormatAtOrderTimeForCreatePizza() throws PizzaException, LogHandlerException {
+	public void invalidFormatAtOrderTimeForCreatePizza() throws PizzaException, LogHandlerException {
 		LogHandler.createPizza("asdasd,19:20:00,Casey Jones,0123456789,DVC,10,5,PZV,2");
 	}
 
 	@Test(expected = LogHandlerException.class)
-	public void DoubleValueAtOrderTimeForCreatePizza() throws PizzaException, LogHandlerException {
+	public void doubleValueAtOrderTimeForCreatePizza() throws PizzaException, LogHandlerException {
 		LogHandler.createPizza("19.50:00:00,19:20:00,Casey Jones,0123456789,DVC,10,5,PZV,2");
 	}
 
 	@Test(expected = LogHandlerException.class)
-	public void OverMinuteLimitAtOrderTimeForCreatePizza() throws PizzaException, LogHandlerException {
+	public void overMinuteLimitAtOrderTimeForCreatePizza() throws PizzaException, LogHandlerException {
 		LogHandler.createPizza("19:80:00,19:20:00,Casey Jones,0123456789,DVC,10,5,PZV,2");
 	}
 
 	@Test(expected = LogHandlerException.class)
-	public void NegativeValueAtOrderTimeForCreatePizzaForCreatePizza() throws PizzaException, LogHandlerException {
+	public void negativeValueAtOrderTimeForCreatePizza() throws PizzaException, LogHandlerException {
+		LogHandler.createPizza("-19:00:00,19:20:00,Casey Jones,0123456789,DVC,10,5,PZV,2");
+	}
+	
+	@Test(expected = LogHandlerException.class)
+	public void insufficientDataWillThrowExceptionForCreatePizza() throws PizzaException, LogHandlerException {
 		LogHandler.createPizza("-19:00:00,19:20:00,Casey Jones,0123456789,DVC,10,5,PZV,2");
 	}
 }

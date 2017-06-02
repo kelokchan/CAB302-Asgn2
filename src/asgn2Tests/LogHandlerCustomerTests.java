@@ -30,6 +30,7 @@ public class LogHandlerCustomerTests {
 	final static String FILE_11 = Paths.get("logs/Unit_Test/Customer/LocationXOverflow.jpg").toString();
 	final static String FILE_12 = Paths.get("logs/Unit_Test/Customer/DoubleFormatLocationY.txt").toString();
 	final static String FILE_13 = Paths.get("logs/Unit_Test/Customer/DoubleFormatLocationX.jpg").toString();
+	final static String FILE_14 = Paths.get("logs/Unit_Test/InsufficientData.txt").toString();
 
 	@Test (expected = LogHandlerException.class)
 	public void noFilenameGivenWillThrowException() throws CustomerException, LogHandlerException {
@@ -91,6 +92,11 @@ public class LogHandlerCustomerTests {
 		LogHandler.populateCustomerDataset(FILE_13);
 	}
 	
+	@Test (expected = LogHandlerException.class)
+	public void insufficientDataWillThrowException()throws CustomerException, LogHandlerException{
+		LogHandler.populateCustomerDataset(FILE_14);
+	}
+	
 	@Test 
 	public void correctCreateCustomer()throws CustomerException, LogHandlerException{
 		LogHandler.createCustomer("19:00:00,19:20:00,Casey Jones,0123456789,DVC,5,5,PZV,2");
@@ -139,6 +145,11 @@ public class LogHandlerCustomerTests {
 	@Test (expected = LogHandlerException.class)
 	public void doubleFormatLocationYWillThrowExceptionForCreateCustomer()throws CustomerException, LogHandlerException{
 		LogHandler.createCustomer("19:00:00,19:20:00,0123456789,DVC,5,5.5,PZV,2");
+	}
+	
+	@Test (expected = LogHandlerException.class)
+	public void insufficientDataWillThrowExceptionForCreateCustomer()throws CustomerException, LogHandlerException{
+		LogHandler.createCustomer("19:00:00,19:20:00");
 	}
 
 }
