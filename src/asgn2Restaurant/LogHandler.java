@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.time.LocalTime;
 import java.util.ArrayList;
+
 import asgn2Customers.Customer;
 import asgn2Customers.CustomerFactory;
 import asgn2Exceptions.CustomerException;
@@ -19,7 +20,7 @@ import asgn2Pizzas.PizzaFactory;
  * and Customer object - either as an individual Pizza/Customer object or as an
  * ArrayList of Pizza/Customer objects.
  * 
- * @author Person A and Person B
+ * @author Lee Chun Voo and Kuok Kit Chan
  *
  */
 public class LogHandler {
@@ -37,7 +38,7 @@ public class LogHandler {
 	 * 
 	 */
 	public static ArrayList<Customer> populateCustomerDataset(String filename) throws CustomerException, LogHandlerException{
-		// TO DO
+		
 		ArrayList<Customer> customerList;
 
 		try {
@@ -66,7 +67,7 @@ public class LogHandler {
 	 * 
 	 */
 	public static ArrayList<Pizza> populatePizzaDataset(String filename) throws PizzaException, LogHandlerException{
-		// TO DO
+		
 		ArrayList<Pizza> pizzaList;
 
 		try {
@@ -96,7 +97,7 @@ public class LogHandler {
 	 * @throws LogHandlerException - If there was a problem parsing the line from the log file.
 	 */
 	public static Customer createCustomer(String line) throws CustomerException, LogHandlerException{
-		// TO DO
+		
 		try {
 			String[] lineArr = line.split(COMMA);
 			String name = lineArr[2];
@@ -122,7 +123,7 @@ public class LogHandler {
 	 * @throws LogHandlerException - If there was a problem parsing the line from the log file.
 	 */
 	public static Pizza createPizza(String line) throws PizzaException, LogHandlerException{
-		// TO DO
+		
 		try {
 			String[] lineArr = line.split(COMMA);
 			LocalTime orderTime = LocalTime.parse(lineArr[0]);

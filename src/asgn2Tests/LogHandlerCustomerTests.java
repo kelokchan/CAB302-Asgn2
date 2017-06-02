@@ -1,14 +1,10 @@
 package asgn2Tests;
 
-import java.io.FileNotFoundException;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import asgn2Customers.Customer;
 import asgn2Exceptions.CustomerException;
 import asgn2Exceptions.LogHandlerException;
 import asgn2Restaurant.LogHandler;
@@ -16,10 +12,10 @@ import asgn2Restaurant.LogHandler;
 /**
  * A class that tests the methods relating to the creation of Customer objects in the asgn2Restaurant.LogHander class.
  *
- * @author Person A
+ * @author Lee Chun Voo
  */
 public class LogHandlerCustomerTests {
-	// TO DO
+	
 	
 	final static String FILE_1 = Paths.get("logs/20170101.txt").toString();
 	final static String FILE_2 = Paths.get("logs/20170102.txt").toString();
@@ -28,17 +24,13 @@ public class LogHandlerCustomerTests {
 	final static String FILE_5 = Paths.get("logs/Unit_Test/Customer/InvalidLocationXFormat.txt").toString();
 	final static String FILE_6 = Paths.get("logs/Unit_Test/Customer/InvalidLocationYFormat.txt").toString();
 	final static String FILE_7 = Paths.get("logs/Unit_Test/WrongFormatFile.jpg").toString();
-	final static String FILE_8 = Paths.get("logs/Unit_Test/Customer/IntMinForLocationX.txt").toString();
-	final static String FILE_9 = Paths.get("logs/Unit_Test/Customer/IntMinForLocationY.txt").toString();
-	final static String FILE_10 = Paths.get("logs/Unit_Test/Customer/IntMaxForLocationY.txt").toString();
-	final static String FILE_11 = Paths.get("logs/Unit_Test/Customer/IntMaxForLocationX.jpg").toString();
+	final static String FILE_8 = Paths.get("logs/Unit_Test/Customer/LocationXOverflow2.txt").toString();
+	final static String FILE_9 = Paths.get("logs/Unit_Test/Customer/LocationYOverflow2.txt").toString();
+	final static String FILE_10 = Paths.get("logs/Unit_Test/Customer/LocationYOverflow.txt").toString();
+	final static String FILE_11 = Paths.get("logs/Unit_Test/Customer/LocationXOverflow.jpg").toString();
 	final static String FILE_12 = Paths.get("logs/Unit_Test/Customer/DoubleFormatLocationY.txt").toString();
 	final static String FILE_13 = Paths.get("logs/Unit_Test/Customer/DoubleFormatLocationX.jpg").toString();
-	
-	@Before
-	public void setUp() throws Exception {
-	}
-	
+
 	@Test (expected = LogHandlerException.class)
 	public void noFilenameGivenWillThrowException() throws CustomerException, LogHandlerException {
 		LogHandler.populateCustomerDataset("");
@@ -70,16 +62,6 @@ public class LogHandlerCustomerTests {
 	}
 	
 	@Test (expected = LogHandlerException.class)
-	public void exceedIntegerLimitLocationXWillThrowException()throws CustomerException, LogHandlerException{
-		LogHandler.populateCustomerDataset(FILE_11);
-	}
-	
-	@Test (expected = LogHandlerException.class)
-	public void exceedIntegerLimitLocationYWillThrowException()throws CustomerException, LogHandlerException{
-		LogHandler.populateCustomerDataset(FILE_10);
-	}
-	
-	@Test (expected = LogHandlerException.class)
 	public void lessThanIntegerNegativeLimitLocationXWillThrowException()throws CustomerException, LogHandlerException{
 		LogHandler.populateCustomerDataset(FILE_8);
 	}
@@ -88,15 +70,25 @@ public class LogHandlerCustomerTests {
 	public void lessThanIntegerNegativeLimitLocationYWillThrowException()throws CustomerException, LogHandlerException{
 		LogHandler.populateCustomerDataset(FILE_9);
 	}
+
+	@Test (expected = LogHandlerException.class)
+	public void exceedIntegerLimitLocationYWillThrowException()throws CustomerException, LogHandlerException{
+		LogHandler.populateCustomerDataset(FILE_10);
+	}
 	
 	@Test (expected = LogHandlerException.class)
-	public void doubleValueLocationYWillThrowException()throws CustomerException, LogHandlerException{
-		LogHandler.populateCustomerDataset(FILE_13);
+	public void exceedIntegerLimitLocationXWillThrowException()throws CustomerException, LogHandlerException{
+		LogHandler.populateCustomerDataset(FILE_11);
 	}
 	
 	@Test (expected = LogHandlerException.class)
 	public void doubleFormatLocationYWillThrowException()throws CustomerException, LogHandlerException{
 		LogHandler.populateCustomerDataset(FILE_12);
+	}
+	
+	@Test (expected = LogHandlerException.class)
+	public void doubleValueLocationYWillThrowException()throws CustomerException, LogHandlerException{
+		LogHandler.populateCustomerDataset(FILE_13);
 	}
 	
 	@Test 

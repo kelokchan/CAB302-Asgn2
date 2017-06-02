@@ -11,18 +11,18 @@ import asgn2Restaurant.LogHandler;
 
 /** A class that tests the methods relating to the creation of Pizza objects in the asgn2Restaurant.LogHander class.
 * 
-* @author Person B
+* @author Kuok Kit Chan
 * 
 */
 public class LogHandlerPizzaTests {
-	// TO DO	
+		
 	final static String FILE_1 = Paths.get("logs/20170101.txt").toString();
 	final static String FILE_2 = Paths.get("logs/20170102.txt").toString();
 	final static String FILE_3 = Paths.get("logs/20170103.txt").toString();
 	final static String FILE_4 = Paths.get("logs/Unit_Test/Pizza/Pizza/WrongQuantityFormat.txt").toString();
 	final static String FILE_5 = Paths.get("logs/Unit_Test/WrongFormatFile.jpg").toString();
-	final static String FILE_6 = Paths.get("logs/Unit_Test/Pizza/IntMaxForQuantity.txt").toString();
-	final static String FILE_7 = Paths.get("logs/Unit_Test/Pizza/IntMinForQuantity.jpg").toString();
+	final static String FILE_6 = Paths.get("logs/Unit_Test/Pizza/QuantityIntOverflow.txt").toString();
+	final static String FILE_7 = Paths.get("logs/Unit_Test/Pizza/QuantityIntOverflow2.txt").toString();
 	final static String FILE_8 = Paths.get("logs/Unit_Test/Pizza/OverHourLimitAtDeliveryTime.txt").toString();
 	final static String FILE_9 = Paths.get("logs/Unit_Test/Pizza/OverMinuteLimitAtDeliveryTime.txt").toString();
 	final static String FILE_10 = Paths.get("logs/Unit_Test/Pizza/InvalidFormatAtDeliveryTime.txt").toString();

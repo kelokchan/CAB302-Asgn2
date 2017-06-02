@@ -18,11 +18,11 @@ import asgn2Restaurant.PizzaRestaurant;
  * A class that tests the methods relating to the handling of Pizza objects in the asgn2Restaurant.PizzaRestaurant class as well as
  * processLog and resetDetails.
  * 
- * @author Person B
+ * @author Kuok Kit Chan
  *
  */
 public class RestaurantPizzaTests {
-	// TO DO
+	
 	final static String FILE_1 = Paths.get("logs/20170101.txt").toString();
 	final static String FILE_2 = Paths.get("logs/20170102.txt").toString();
 	final static String FILE_3 = Paths.get("logs/20170103.txt").toString();

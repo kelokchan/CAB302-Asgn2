@@ -7,7 +7,7 @@ import asgn2Exceptions.CustomerException;
  * Distance between the customer and the restaurant.  A description of the class's
  * fields and their constraints is provided in Section 5.2 of the Assignment Specification.
  * 
- * @author PersonB
+ * @author Kuok Kit Chan
  *
  */
 public class DroneDeliveryCustomer extends Customer {
@@ -29,7 +29,7 @@ public class DroneDeliveryCustomer extends Customer {
 	 * 
 	 */
 	public DroneDeliveryCustomer(String name, String mobileNumber, int locationX, int locationY) throws CustomerException {
-		// TO DO		
+				
 		super(name, mobileNumber, locationX, locationY, "Drone Delivery");
 	}
 
@@ -41,7 +41,7 @@ public class DroneDeliveryCustomer extends Customer {
 	 */
 	@Override
 	public double getDeliveryDistance() {
-		// TO DO
+		
 		double distance = Math.sqrt(Math.pow((locationX - 0), 2) + Math.pow((locationY - 0), 2));
 		return distance;
 	}

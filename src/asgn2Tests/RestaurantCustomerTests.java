@@ -1,13 +1,14 @@
 package asgn2Tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.nio.file.Paths;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import asgn2Customers.Customer;
 import asgn2Exceptions.CustomerException;
 import asgn2Exceptions.LogHandlerException;
 import asgn2Exceptions.PizzaException;
@@ -17,10 +18,10 @@ import asgn2Restaurant.PizzaRestaurant;
  * A class that that tests the methods relating to the handling of Customer objects in the asgn2Restaurant.PizzaRestaurant
  * class as well as processLog and resetDetails.
  * 
- * @author Person A
+ * @author Lee Chun Voo
  */
 public class RestaurantCustomerTests {
-	// TO DO
+	
 	final static String FILE_1 = Paths.get("logs/20170101.txt").toString();
 	final static String FILE_2 = Paths.get("logs/20170102.txt").toString();
 	final static String FILE_3 = Paths.get("logs/20170103.txt").toString();

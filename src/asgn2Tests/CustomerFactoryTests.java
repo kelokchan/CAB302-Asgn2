@@ -1,5 +1,5 @@
 package asgn2Tests;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
@@ -12,7 +12,7 @@ import asgn2Exceptions.CustomerException;
 /**
  * A class the that tests the asgn2Customers.CustomerFactory class.
  * 
- * @author Person A
+ * @author Lee Chun Voo
  *
  */
 public class CustomerFactoryTests {

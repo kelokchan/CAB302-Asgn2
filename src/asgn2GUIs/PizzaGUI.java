@@ -14,20 +14,19 @@ import javax.swing.*;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.IconView;
 
 /**
  * This class is the graphical user interface for the rest of the system.
- * Currently it is a ‘dummy’ class which extends JFrame and implements Runnable
+ * Currently it is a ï¿½dummyï¿½ class which extends JFrame and implements Runnable
  * and ActionLister. It should contain an instance of an
  * asgn2Restaurant.PizzaRestaurant object which you can use to interact with the
  * rest of the system. You may choose to implement this class as you like,
- * including changing its class signature – as long as it maintains its core
+ * including changing its class signature ï¿½ as long as it maintains its core
  * responsibility of acting as a GUI for the rest of the system. You can also
  * use this class and asgn2Wizards.PizzaWizard to test your system as a whole
  * 
  * 
- * @author Person A and Person B
+ * @author Lee Chun Voo and Kuok Kit Chan
  *
  */
 public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionListener {
@@ -53,15 +52,13 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 
 	private JFileChooser chooser;
 
-	String[] custColumnHeaders = new String[] { "Customer Name", "Mobile Number", "Customer Type", "Location-X",
-			"Location-Y", "Delivery Distance" };
-	String[] orderColumnHeaders = new String[] { "Pizza Type", "Quantity", "Order Price", "Order Cost",
-			"Order Profit" };
+	private static final String[] CUST_TABLE_HEADER = new String[] { "Customer Name", "Mobile Number", "Customer Type", "Location-X", "Location-Y", "Delivery Distance" };
+	private static final String[] ORDER_TABLE_HEADER = new String[] { "Pizza Type", "Quantity", "Order Price", "Order Cost", "Order Profit" };
 
 	private DefaultTableModel custModel;
 	private JTable custTable;
-	private DefaultTableModel OrderModel;
-	private JTable OrderTable;
+	private DefaultTableModel orderModel;
+	private JTable orderTable;
 	private JScrollPane tablePane;
 	private File selectedFile = null;
 
@@ -70,25 +67,24 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 	 * @param title - The title for the supertype JFrame
 	 */
 	public PizzaGUI(String title) {
-		// TO DO
+		
 		super(title);
 	}
 
 	@Override
 	public void run() {
-		// TO DO
+		
 		try {
 		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 		        if ("Nimbus".equals(info.getName())) {
 		            UIManager.setLookAndFeel(info.getClassName());
-		            createGUI();
-		            break;
 		        }
 		    }
 		} catch (Exception e) {
-		    // If Nimbus is not available, you can set the GUI to another look and feel.
+		    e.printStackTrace();
 		}
 		
+		createGUI();
 	}
 
 	@Override
@@ -99,7 +95,6 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		if (src == btnLog) {
 			this.chooser = new JFileChooser();
 			this.chooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
-
 			FileNameExtensionFilter filter = new FileNameExtensionFilter(".txt File", "txt");
 			chooser.setFileFilter(filter);
 
@@ -107,13 +102,13 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 
 			if (returnValue == JFileChooser.APPROVE_OPTION) {
 				selectedFile = chooser.getSelectedFile();
-
 				try {
 					selectedFile = new File(selectedFile.getPath());
 					restaurant = new PizzaRestaurant();
 					if (restaurant.processLog(selectedFile.getPath())) {
 						JOptionPane.showMessageDialog(this, "Log file loaded successfully");
 						btnLog.setText(selectedFile.getName());
+						btnLog.setEnabled(false);
 					}
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -137,7 +132,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 					}
 				}
 
-				custModel = new DefaultTableModel(custlist, custColumnHeaders) {
+				custModel = new DefaultTableModel(custlist, CUST_TABLE_HEADER) {
 					/**
 					 * To remove the no serialVersionUID set warning
 					 */
@@ -170,7 +165,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 					}
 				}
 
-				OrderModel = new DefaultTableModel(orderlist, orderColumnHeaders) {
+				orderModel = new DefaultTableModel(orderlist, ORDER_TABLE_HEADER) {
 					/**
 					 * To remove the no serialVersionUID set warning
 					 */
@@ -181,8 +176,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 						return false; // Disable cell editing
 					}
 				};
-				OrderTable = new JTable(OrderModel);
-				tablePane.setViewportView(OrderTable);
+				orderTable = new JTable(orderModel);
+				tablePane.setViewportView(orderTable);
 			} else {
 				JOptionPane.showMessageDialog(this, "No File Selected", "Error", JOptionPane.ERROR_MESSAGE);
 			}
@@ -193,20 +188,23 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 			selectedFile = null;
 			tablePane.setViewportView(null);
 			btnLog.setText("Load a Log File");
+			btnLog.setEnabled(true);
 		}
 		
 		if (src == btnCalProfit) {
-			if (selectedFile != null)
-				JOptionPane.showMessageDialog(this, "Total profie earned: $" + String.format("%.2f", restaurant.getTotalProfit()));
-			else
+			if (selectedFile != null) {
+				JOptionPane.showMessageDialog(this, "Total profit earned: $" + String.format("%.2f", restaurant.getTotalProfit()));
+			} else {
 				JOptionPane.showMessageDialog(this, "No File Selected", "Error", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 		
 		if (src == btnCalDist) {
-			if (selectedFile != null)
+			if (selectedFile != null) {
 				JOptionPane.showMessageDialog(this, "Total delivery distance: " + String.format("%.2f", restaurant.getTotalDeliveryDistance()));
-			else
+			} else {
 				JOptionPane.showMessageDialog(this, "No File Selected", "Error", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 
 	}
@@ -238,7 +236,6 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		this.setLocation(screenSize.width / 2 - this.getSize().width / 2,
 				screenSize.height / 2 - this.getSize().height / 2);
 		pack();
-		System.out.println(Integer.valueOf(btnCalProfit.getHeight()));
 	}
 
 	private JButton createButton(String str) {

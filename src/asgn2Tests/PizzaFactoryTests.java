@@ -1,10 +1,9 @@
 package asgn2Tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.time.LocalTime;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import asgn2Exceptions.PizzaException;
@@ -16,7 +15,7 @@ import asgn2Pizzas.VegetarianPizza;
 /** 
  * A class that tests the asgn2Pizzas.PizzaFactory class.
  * 
- * @author Person B 
+ * @author Kuok Kit Chan 
  * 
  */
 public class PizzaFactoryTests {

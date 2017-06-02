@@ -1,9 +1,10 @@
 package asgn2Pizzas;
 
-import java.time.Duration;
+import static java.time.temporal.ChronoUnit.MINUTES;
+
 import java.time.LocalTime;
 import java.util.ArrayList;
-import static java.time.temporal.ChronoUnit.MINUTES;
+
 import asgn2Exceptions.PizzaException;
 
 /**
@@ -12,7 +13,7 @@ import asgn2Exceptions.PizzaException;
  * Each of these subclasses have a different set of toppings. A description of the class's fields
  * and their constraints is provided in Section 5.1 of the Assignment Specification. 
  * 
- * @author Person A
+ * @author Lee Chun Voo
  *
  */
 public abstract class Pizza  {
@@ -43,7 +44,7 @@ public abstract class Pizza  {
 	 * 
 	 */
 	public Pizza(int quantity, LocalTime orderTime, LocalTime deliveryTime, String type, double price) throws PizzaException{
-		// TO DO	
+			
 		LocalTime openTime = LocalTime.parse("19:00:00");
 		LocalTime closeTime = LocalTime.parse("23:00:00");
 
@@ -111,7 +112,7 @@ public abstract class Pizza  {
 	 * <P> POST: The cost field is set to sum of the Pizzas's toppings
 	 */
 	public final void calculateCostPerPizza(){
-		// TO DO
+		
 		for (PizzaTopping pizzaTopping : toppings) {
 			cost += pizzaTopping.getCost();
 		}
@@ -122,7 +123,7 @@ public abstract class Pizza  {
 	 * @return The amount that an individual pizza costs to make.
 	 */
 	public final double getCostPerPizza(){
-		// TO DO
+		
 		return cost;
 	}
 
@@ -131,7 +132,7 @@ public abstract class Pizza  {
 	 * @return The amount that an individual pizza is sold to the customer.
 	 */
 	public final double getPricePerPizza(){
-		// TO DO
+		
 		return price;
 	}
 
@@ -140,7 +141,7 @@ public abstract class Pizza  {
 	 * @return The amount that the entire order costs to make, taking into account the type and quantity of pizzas. 
 	 */
 	public final double getOrderCost(){
-		// TO DO
+		
 		orderCost = (getCostPerPizza() * quantity);
 		return orderCost;
 	}
@@ -150,7 +151,7 @@ public abstract class Pizza  {
 	 * @return The amount that the entire order is sold to the customer, taking into account the type and quantity of pizzas. 
 	 */
 	public final double getOrderPrice(){
-		// TO DO
+		
 		orderPrice = (getPricePerPizza() * quantity);
 		return orderPrice;
 	}
@@ -161,7 +162,7 @@ public abstract class Pizza  {
 	 * @return  Returns the profit made by the restaurant on the order which is the order price minus the order cost.
 	 */
 	public final double getOrderProfit(){
-		// TO DO
+		
 		orderProfit = getOrderPrice() - getOrderCost();
 		return orderProfit;
 	}
@@ -173,7 +174,7 @@ public abstract class Pizza  {
 	 * @return Returns  true if the instance of Pizza contains the specified topping and false otherwise.
 	 */
 	public final boolean containsTopping(PizzaTopping topping){
-		// TO DO
+		
 		if(this.toppings.contains(topping)){
 			return true;
 		}
@@ -185,7 +186,7 @@ public abstract class Pizza  {
 	 * @return the quantity of pizzas ordered. 
 	 */
 	public final int getQuantity(){
-		// TO DO
+		
 		return quantity;
 	}
 
@@ -195,7 +196,7 @@ public abstract class Pizza  {
 	 * @return A human understandable description of the Pizza's type.
 	 */
 	public final String getPizzaType(){
-		// TO DO
+		
 		return type;
 	}
 

@@ -1,10 +1,9 @@
 package asgn2Tests;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import asgn2Customers.Customer;
 import asgn2Customers.DriverDeliveryCustomer;
 import asgn2Customers.DroneDeliveryCustomer;
 import asgn2Customers.PickUpCustomer;
@@ -15,7 +14,7 @@ import asgn2Exceptions.CustomerException;
  * asgn2Customers.DroneDeliveryCustomer classes. Note that an instance of asgn2Customers.DriverDeliveryCustomer 
  * should be used to test the functionality of the  asgn2Customers.Customer abstract class. 
  * 
- * @author Person A
+ * @author Lee Chun Voo
  * 
  *
  */
