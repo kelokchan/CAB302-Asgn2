@@ -3,10 +3,13 @@ package asgn2Restaurant;
 import java.util.ArrayList;
 
 import asgn2Customers.Customer;
+import asgn2Exceptions.CustomerException;
+import asgn2Exceptions.LogHandlerException;
+import asgn2Exceptions.PizzaException;
 import asgn2Pizzas.Pizza;
 
 /**
- * This class acts as a ‘model’ of a pizza restaurant. It contains an ArrayList of Pizza objects and an ArrayList of  Customer objects.
+ * This class acts as a ï¿½modelï¿½ of a pizza restaurant. It contains an ArrayList of Pizza objects and an ArrayList of  Customer objects.
  *  It contains a method that can populate the ArrayLists,  several methods to retrieve information about the ArrayLists and 
  *  a method to reset the array list. Information about the x and y location of the restaurant and the time that first and last 
  *  orders are accepted are listed in Section 5 of the Assignment Specification. 
@@ -14,7 +17,7 @@ import asgn2Pizzas.Pizza;
  *  Any exceptions raised by one of the methods called by this class should be passed to asgn2GUIs.PizzaGUI so that it can be shown to
  *  the user.
  * 
- * @author Person A and Person B
+ * @author Lee Chun Voo and Kuok Kit Chan
  *
  */
 public class PizzaRestaurant {
@@ -32,7 +35,9 @@ public class PizzaRestaurant {
 	 * 
 	 */
 	public PizzaRestaurant() {
-		// TO DO
+		
+		customers = new ArrayList<Customer>();
+		pizzas = new ArrayList<Pizza>();
 	}
 
 	/**
@@ -51,7 +56,18 @@ public class PizzaRestaurant {
      *
 	 */
 	public boolean processLog(String filename) throws CustomerException, PizzaException, LogHandlerException{
-		// TO DO
+		
+		try {
+			customers = LogHandler.populateCustomerDataset(filename);
+			pizzas = LogHandler.populatePizzaDataset(filename);
+			return true;
+		} catch (CustomerException ce) {
+			throw new CustomerException(ce);
+		} catch (PizzaException pe) {
+			throw new PizzaException(pe);
+		} catch (LogHandlerException le) {
+			throw new LogHandlerException(le);
+		}
 	}
 
 	/**
@@ -61,7 +77,12 @@ public class PizzaRestaurant {
 	 * @throws CustomerException if index is invalid.
 	 */
 	public Customer getCustomerByIndex(int index) throws CustomerException{
-		// TO DO
+		
+		if (index < 0 || index >= customers.size()) {
+			throw new CustomerException("Invalid index");
+		}
+		
+		return customers.get(index);
 	}
 	
 	/**
@@ -71,7 +92,12 @@ public class PizzaRestaurant {
 	 * @throws PizzaException if index is invalid.
 	 */	
 	public Pizza getPizzaByIndex(int index) throws PizzaException{
-		// TO DO
+		
+		if (index < 0 || index >= pizzas.size()) {
+			throw new PizzaException("Invalid index");
+		}
+		
+		return pizzas.get(index);
 	}
 	
 	/**
@@ -81,7 +107,8 @@ public class PizzaRestaurant {
 	 * @return the number of objects contained in the pizzas field.
 	 */
 	public int getNumPizzaOrders(){
-		// TO DO
+		
+		return pizzas.size();
 	}
 
 	/**
@@ -91,7 +118,8 @@ public class PizzaRestaurant {
 	 * @return the number of objects contained in the customers field.
 	 */
 	public int getNumCustomerOrders(){
-		// TO DO
+		
+		return customers.size();
 	}
 
 			
@@ -102,7 +130,14 @@ public class PizzaRestaurant {
 	 * @return the total delivery distance for all Customers objects in the customers field.
 	 */
 	public double getTotalDeliveryDistance(){
-		// TO DO
+		
+		double totalDistance = 0.0;
+		
+		for (Customer customer : customers) {
+			totalDistance += customer.getDeliveryDistance();
+		}
+		
+		return totalDistance;
 	}
 
 	/**
@@ -111,7 +146,14 @@ public class PizzaRestaurant {
 	 * @return the total profit for all of the Pizza objects in the pizzas field.
 	 */	
 	public double getTotalProfit(){
-		// TO DO
+		
+		double totalProfit = 0.0;
+		
+		for (Pizza pizza : pizzas) {
+			totalProfit += pizza.getOrderProfit();
+		}
+		
+		return totalProfit;
 	}
 	
 	/**
@@ -121,7 +163,9 @@ public class PizzaRestaurant {
 	 * <P> POST:  The pizzas and customers fields are set to their initial empty states
 	 */
 	public void resetDetails(){
-		// TO DO
+		
+		customers.clear();
+		pizzas.clear();
 	}
 
 }

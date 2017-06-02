@@ -11,7 +11,7 @@ import asgn2Exceptions.PizzaException;
  *  The vegetarian pizza has certain toppings listed in Section 5.1 of the Assignment Specification Document.  
  *  A description of the class's fields and their constraints is provided in Section 5.1 of the Assignment Specification.
  * 
- * @author PersonA
+ * @author Lee Chun Voo
  *
  */
 public class VegetarianPizza extends Pizza {
@@ -32,7 +32,9 @@ public class VegetarianPizza extends Pizza {
 	 *
 	 */
 	public VegetarianPizza(int quantity, LocalTime orderTime, LocalTime deliveryTime) throws PizzaException {
-		// TO DO
+		
+		super(quantity, orderTime, deliveryTime, "Vegetarian", 10.0);
+
 	}
 
 }
