@@ -109,6 +109,7 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 						JOptionPane.showMessageDialog(this, "Log file loaded successfully");
 						btnLog.setText(selectedFile.getName());
 						btnLog.setEnabled(false);
+						btnReset.setEnabled(true);
 					}
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -184,11 +185,14 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		}
 
 		if (src == btnReset) {
-			restaurant.resetDetails();
-			selectedFile = null;
-			tablePane.setViewportView(null);
-			btnLog.setText("Load a Log File");
-			btnLog.setEnabled(true);
+			if(selectedFile != null){
+				restaurant.resetDetails();
+				selectedFile = null;
+				tablePane.setViewportView(null);
+				btnLog.setText("Load a Log File");
+				btnLog.setEnabled(true);
+			}
+			btnReset.setEnabled(false);
 		}
 		
 		if (src == btnCalProfit) {
@@ -224,6 +228,8 @@ public class PizzaGUI extends javax.swing.JFrame implements Runnable, ActionList
 		btnCalDist = createButton("Calculate Total Distance");
 		btnCalProfit = createButton("Calculate Total Profit");
 
+		btnReset.setEnabled(false);
+		
 		tablePane = new JScrollPane(custTable);
 		this.getContentPane().add(tablePane, BorderLayout.CENTER);
 		layoutButtonPanel();

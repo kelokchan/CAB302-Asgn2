@@ -61,7 +61,7 @@ public class RestaurantPizzaTests {
 	}
 	
 	@Test
-	public void getPizzaByIndexReturnCustClass() throws PizzaException {
+	public void getPizzaByIndexReturnPizzaClass() throws PizzaException {
 		assertNotNull(restaurant.getPizzaByIndex(1));
 	}
 	
